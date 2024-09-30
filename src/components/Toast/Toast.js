@@ -6,6 +6,7 @@ import {
   Info,
   X,
 } from "react-feather";
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 import styles from "./Toast.module.css";
 
@@ -16,20 +17,11 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ children, variant, index, list, setList }) {
+function Toast({ id, variant, children }) {
   let newVariant = styles[variant];
   let Icon = ICONS_BY_VARIANT[variant];
 
-  function handleCancel(index) {
-    let newArr = [];
-    for (let i = 0; i < list.length; i++) {
-      const element = list[i];
-      if (element !== list[index]) {
-        newArr.push(element);
-      }
-    }
-    setList(newArr);
-  }
+  const { dismissToast } = React.useContext(ToastContext);
 
   return (
     <div className={`${styles.toast} ${newVariant}`}>
@@ -37,10 +29,7 @@ function Toast({ children, variant, index, list, setList }) {
         <Icon />
       </div>
       <p className={styles.content}>{children}</p>
-      <button
-        onClick={() => handleCancel(index)}
-        className={styles.closeButton}
-      >
+      <button onClick={() => dismissToast(id)} className={styles.closeButton}>
         <X size={24} />
       </button>
     </div>
