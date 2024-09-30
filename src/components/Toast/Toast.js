@@ -7,6 +7,7 @@ import {
   X,
 } from "react-feather";
 import { ToastContext } from "../ToastProvider/ToastProvider";
+import VisuallyHidden from "../VisuallyHidden/VisuallyHidden"
 
 import styles from "./Toast.module.css";
 
@@ -22,19 +23,6 @@ function Toast({ id, variant, children }) {
   let Icon = ICONS_BY_VARIANT[variant];
 
   const { dismissToast } = React.useContext(ToastContext);
-
-  React.useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.code === "Escape") {
-        dismissToast(id);
-      }
-    }
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [children]);
 
   return (
     <div className={`${styles.toast} ${newVariant}`}>
