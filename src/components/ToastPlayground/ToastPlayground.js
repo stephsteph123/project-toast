@@ -7,9 +7,11 @@ import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
-// Components that require the state should pull it from context with the useContext hook, rather than passing through props.
-// As we saw in the “Provider Components” lesson, we can also share functions that allow consumers to alter the state. Consider making functions available that will create a new toast, or dismiss a specific toast.
-// This is a “refactor” exercise. The user experience shouldn't change at all.
+// screenreader //
+// The <ol> should have the specified role / aria tags
+// The toast's content should be prefixed with the variant, using the VisuallyHidden component.
+// NOTE: The diff above shows an error toast, but the prefix should be dynamic, based on the variant.
+// The “Dismiss message” content in the close button should be moved to an aria-label. aria-live should also be set to "off".
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
@@ -24,7 +26,7 @@ function ToastPlayground() {
 
     setMessage("");
     setVariant(VARIANT_OPTIONS[0]);
-  }
+  };
 
   return (
     <div className={styles.wrapper}>
