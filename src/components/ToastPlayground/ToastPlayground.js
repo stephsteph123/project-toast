@@ -7,12 +7,6 @@ import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
-// screenreader //
-// The <ol> should have the specified role / aria tags
-// The toast's content should be prefixed with the variant, using the VisuallyHidden component.
-// NOTE: The diff above shows an error toast, but the prefix should be dynamic, based on the variant.
-// The “Dismiss message” content in the close button should be moved to an aria-label. aria-live should also be set to "off".
-
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
@@ -26,7 +20,7 @@ function ToastPlayground() {
 
     setMessage("");
     setVariant(VARIANT_OPTIONS[0]);
-  };
+  }
 
   return (
     <div className={styles.wrapper}>
